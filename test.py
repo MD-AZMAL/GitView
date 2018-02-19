@@ -11,3 +11,5 @@ Az.user_repos() # display repository details
 Dan = User('shiffman')
 Dan.user_details()
 Dan.user_repos()
+
+# can add input form
