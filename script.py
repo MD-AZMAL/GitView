@@ -14,7 +14,10 @@ class User:
 		names = soup.find('h1',{'class':'vcard-names'}).find_all('span') 	# span containing deatails for names
 		name = names[0].text			
 		nick_name = names[1].text
-		bio = soup.find('div',{'class','user-profile-bio'}).text # bio 
+		try:
+			bio = soup.find('div',{'class','user-profile-bio'}).text # bio 
+		except:
+			bio = 'None' # some users do not add bio
 		contributions = soup.find('div',{'class':'js-contribution-graph'}).h2.text.strip().split('\n')[0] # user's contributions
 
 		repos = BeautifulSoup(requests.get(url+usrname+repo_li).content,'html.parser')
@@ -38,7 +41,7 @@ class User:
 
 	def user_details(self):
 		"""Display user details"""
-		print('Name : {}\nNick Name : {}\nBio : {}\nContributions : {} in last year'.format(self.name,self.nick_name,self.bio,self.contributions))
+		print('\n\nName : {}\nNick Name : {}\nBio : {}\nContributions : {} in last year'.format(self.name,self.nick_name,self.bio,self.contributions))
 
 	def user_repos(self):
 		"""Display reposiory details"""
