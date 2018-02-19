@@ -11,9 +11,8 @@ class User:
 
 		soup = BeautifulSoup(requests.get(url+usrname).content,'html.parser') # main user page
 
-		names = soup.find('h1',{'class':'vcard-names'}).find_all('span') 	# span containing deatails for names
-		name = names[0].text			
-		nick_name = names[1].text
+		name = soup.find('h1',{'class':'vcard-names'}).find_all('span').text # user name		
+
 		try:
 			bio = soup.find('div',{'class','user-profile-bio'}).text # bio 
 		except:
@@ -34,14 +33,13 @@ class User:
 				project_lang = 'None' # if no files were added and thus language used must be none
 			rep_list.append({'name':project_name,'desc':project_description,'lang':project_lang}) # appending data as dictionary
 		self.name = name
-		self.nick_name = nick_name
 		self.bio = bio
 		self.contributions = contributions
 		self.repos = rep_list
 
 	def user_details(self):
 		"""Display user details"""
-		print('\n\nName : {}\nNick Name : {}\nBio : {}\nContributions : {} in last year'.format(self.name,self.nick_name,self.bio,self.contributions))
+		print('\n\nName : {}\nBio : {}\nContributions : {} in last year'.format(self.name,self.bio,self.contributions))
 
 	def user_repos(self):
 		"""Display reposiory details"""
