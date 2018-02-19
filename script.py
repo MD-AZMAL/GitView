@@ -11,7 +11,7 @@ class User:
 
 		soup = BeautifulSoup(requests.get(url+usrname).content,'html.parser') # main user page
 
-		name = soup.find('h1',{'class':'vcard-names'}).find_all('span').text # user name		
+		name = soup.find('h1',{'class':'vcard-names'}).find_all('span')[0].text # user name		
 
 		try:
 			bio = soup.find('div',{'class','user-profile-bio'}).text # bio 
