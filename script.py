@@ -26,7 +26,10 @@ class User:
 
 		for rep in all_repos:
 			project_name = rep.find('a',{'itemprop':'name codeRepository'}).text.strip() # project name
-			project_description = rep.find('p',{'itemprop':'description'}).text.strip() # project description
+			try:
+				project_description = rep.find('p',{'itemprop':'description'}).text.strip() # project description
+			except:
+				project_description = 'None'
 			try:
 				project_lang = rep.find('div',{'class':'f6'}).find_all('span')[1].text.strip() # language used
 			except:
